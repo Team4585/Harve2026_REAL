@@ -12,26 +12,20 @@ import frc.Constants;
 public class CannonSubsystem extends SubsystemBase {
     private final TalonSRX cannonMotor = new TalonSRX(7);
     private final DutyCycleEncoder motorEncoder = new DutyCycleEncoder(0);
-    private final PIDController pidController = new PIDController(0.2, 0.0, 0.0);
+    private double setpoint = Constants.closedSetpoint;
     
     public CannonSubsystem() {
         cannonMotor.configFactoryDefault();
     }
 
-    public Command openShooter() {
-        return this.run(() -> {
-            double currentPosition = motorEncoder.get(); 
-            double motorOutput = pidController.calculate(currentPosition, Constants.openSetpoint);
-            cannonMotor.set(ControlMode.PercentOutput, motorOutput);
-        });
+    public Command shoot() {
+        return this.runOnce(() -> {setpoint = Constants.openSetpoint;}).andThen(this.run(()->{}).withTimeout(Constants.cannonOpenTime)).andThen(this.runOnce(()->{setpoint = Constants.closedSetpoint;}));
     }
 
-    public Command closeShooter(){
-        return this.run(() -> {
-            double currentPosition = motorEncoder.get(); 
-            double motorOutput = pidController.calculate(currentPosition, Constants.closeSetpoint);
-            cannonMotor.set(ControlMode.PercentOutput, motorOutput);
-        });
+    @Override
+    public void periodic(){
+        double currentPosition = motorEncoder.get();
+        double motorOutput = (setpoint - currentPosition) * Constants.shooterKp;
+        cannonMotor.set(ControlMode.DutyCycle, motorOutput);
     }
-
 }
