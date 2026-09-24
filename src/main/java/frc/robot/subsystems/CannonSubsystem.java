@@ -18,7 +18,7 @@ public class CannonSubsystem extends SubsystemBase {
     }
 
     public Command shoot() {
-        return this.runOnce(() -> {setpoint = Constants.openSetpoint;}).andThen(this.run(()->{}).withTimeout(Constants.cannonOpenTime)).andThen(this.runOnce(()->{setpoint = Constants.closedSetpoint;}));
+        return this.runOnce(() -> {setpoint = Constants.openSetpoint;}, this).andThen(this.run(()->{}, this).withTimeout(Constants.cannonOpenTime)).andThen(this.runOnce(()->{setpoint = Constants.closedSetpoint;}, this));
     }
 
     @Override
