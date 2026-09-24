@@ -1,4 +1,4 @@
-package frc.robot.Subsystems;
+package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -43,7 +43,6 @@ public class Compressor extends SubsystemBase{
             case IDLE:
                 stopCompressor();
                 break;
-
             case ON:
                 if(pressureSensor.get())stopCompressor();
                 else{startCompressor();}
