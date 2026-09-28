@@ -6,7 +6,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.Constants;
+import frc.robot.Constants;
+
 
 public class CannonSubsystem extends SubsystemBase {
     private final TalonSRX cannonMotor = new TalonSRX(7);
@@ -18,7 +19,7 @@ public class CannonSubsystem extends SubsystemBase {
     }
 
     public Command shoot() {
-        return this.runOnce(() -> {setpoint = Constants.openSetpoint;}, this).andThen(this.run(()->{}, this).withTimeout(Constants.cannonOpenTime)).andThen(this.runOnce(()->{setpoint = Constants.closedSetpoint;}, this));
+        return this.runOnce(() -> {setpoint = Constants.openSetpoint;}).andThen(this.run(()->{}).withTimeout(Constants.cannonOpenTime)).andThen(this.runOnce(()->{setpoint = Constants.closedSetpoint;}));
     }
 
     @Override

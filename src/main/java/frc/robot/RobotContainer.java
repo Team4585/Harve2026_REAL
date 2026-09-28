@@ -5,9 +5,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
-import frc.robot.Subsystems.CannonSubsystem;
-import frc.robot.Subsystems.Compressor;
-import frc.robot.Subsystems.DriveSubsystem;
+import frc.robot.subsystems.CannonSubsystem;
+import frc.robot.subsystems.Compressor;
+import frc.robot.subsystems.DriveSubsystem;
 
 public class RobotContainer {
   private final CommandJoystick joystick = new CommandJoystick(0);
