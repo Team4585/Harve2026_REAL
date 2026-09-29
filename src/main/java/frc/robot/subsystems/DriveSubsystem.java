@@ -3,6 +3,9 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import java.util.function.DoubleSupplier;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 public class DriveSubsystem extends SubsystemBase{
@@ -27,9 +30,10 @@ public class DriveSubsystem extends SubsystemBase{
         leftMotor3.setInverted(false);
     }
 
-    public Command drive(double translate, double rotate){
+    public Command drive(DoubleSupplier translate, DoubleSupplier rotate){
         return this.run(()->{
-            dDrive.arcadeDrive(translate, rotate);
+            dDrive.arcadeDrive(translate.getAsDouble(), rotate.getAsDouble());
+            System.out.print("Goon");
         });
     }
 }

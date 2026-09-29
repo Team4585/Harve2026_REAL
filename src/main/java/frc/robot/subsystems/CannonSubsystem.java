@@ -3,7 +3,9 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -27,5 +29,8 @@ public class CannonSubsystem extends SubsystemBase {
         double currentPosition = motorEncoder.get();
         double motorOutput = (setpoint - currentPosition) * Constants.shooterKp;
         cannonMotor.set(ControlMode.PercentOutput, motorOutput);
+        SmartDashboard.putNumber("motorOutput", motorOutput);
+        SmartDashboard.putNumber("currentPos", currentPosition);
+        SmartDashboard.putNumber("setpoint", setpoint);
     }
 }

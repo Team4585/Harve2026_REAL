@@ -14,7 +14,7 @@ public class Compressor extends SubsystemBase{
     }
 
     VictorSPX compressor = new VictorSPX(8);
-    DigitalInput pressureSensor = new DigitalInput(1);
+    DigitalInput pressureSensor = new DigitalInput(2);
 
     CompressorStates currentState = CompressorStates.IDLE;
 

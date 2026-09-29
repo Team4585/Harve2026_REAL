@@ -20,7 +20,7 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    drive.setDefaultCommand(drive.drive(joystick.getY(), joystick.getTwist()));
+    drive.setDefaultCommand(drive.drive(()->joystick.getY(), ()->joystick.getTwist()));
     joystick.button(5).and(joystick.trigger()).onTrue(cannon.shoot());
     joystick.button(2).onTrue(compressor.changeCompressor());
   }
